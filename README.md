@@ -23,7 +23,7 @@
 ```bash
 # 1. Клонировать репозиторий
 git clone https://github.com/ВАШ_ЛОГИН/dds-service.git
-cd dds-project
+cd dds-service
 
 # 2. Создать виртуальное окружение и активировать его
 python3 -m venv venv
