@@ -22,7 +22,7 @@
 
 ```bash
 # 1. Клонировать репозиторий
-git clone https://github.com/ВАШ_ЛОГИН/dds-project.git
+git clone https://github.com/ВАШ_ЛОГИН/dds-service.git
 cd dds-project
 
 # 2. Создать виртуальное окружение и активировать его
@@ -51,7 +51,7 @@ python manage.py runserver
 ## Структура проекта
 
 ```text
-dds-project/
+dds-service/
 ├── dds_project/        # Настройки проекта (settings, urls)
 ├── dds/                # Основное приложение
 │   ├── models.py       # Модели: Status, Type, Category, Subcategory, Transaction
