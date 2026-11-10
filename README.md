@@ -15,15 +15,15 @@
 
 - Python 3.10
 - Django 5.x
-- SQLite (встроенная, без настройки)
+- PostgreSQL (встроенная, без настройки)
 - HTML/CSS (шаблоны Django, без JS-фреймворков)
 
 ## Установка и запуск
 
 ```bash
 # 1. Клонировать репозиторий
-git clone https://github.com/ВАШ_ЛОГИН/dds-service.git
-cd dds-service
+git clone https://github.com/ВАШ_ЛОГИН/DDS_service.git
+cd DDS_service
 
 # 2. Создать виртуальное окружение и активировать его
 python3 -m venv venv
@@ -51,7 +51,7 @@ python manage.py runserver
 ## Структура проекта
 
 ```text
-dds-service/
+DDS_service/
 ├── dds_project/        # Настройки проекта (settings, urls)
 ├── dds/                # Основное приложение
 │   ├── models.py       # Модели: Status, Type, Category, Subcategory, Transaction
