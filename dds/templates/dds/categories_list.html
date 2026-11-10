@@ -1,0 +1,22 @@
+{% extends 'dds/base.html' %}
+
+{% block title %}Категории{% endblock %}
+
+{% block content %}
+    <h1>Список категорий</h1>
+    <table>
+        <thead>
+            <tr><th>Название</th><th>Тип</th></tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.name }}</td>
+                <td>{{ category.type.name }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="2">Категорий пока нет.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

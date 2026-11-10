@@ -1,0 +1,89 @@
+{% extends 'dds/base.html' %}
+
+{% block title %}Транзакции{% endblock %}
+
+{% block content %}
+    <h1>Список транзакций</h1>
+
+    <div class="balance-cards">
+        <div class="card income-card">
+            <span class="card-label">Приход</span>
+            <span class="card-value">{{ income }} ₽</span>
+        </div>
+        <div class="card expense-card">
+            <span class="card-label">Расход</span>
+            <span class="card-value">{{ expense }} ₽</span>
+        </div>
+        <div class="card balance-card">
+            <span class="card-label">Баланс</span>
+            <span class="card-value">{{ balance }} ₽</span>
+        </div>
+    </div>
+
+    <form method="get" class="filter-bar">
+        <div class="filter-row">
+            <label>С
+                <input type="date" name="date_from" value="{{ filters.date_from }}">
+            </label>
+            <label>По
+                <input type="date" name="date_to" value="{{ filters.date_to }}">
+            </label>
+            <select name="status">
+                <option value="">— Статус —</option>
+                {% for s in statuses %}
+                    <option value="{{ s.id }}" {% if filters.status == s.id|stringformat:"s" %}selected{% endif %}>{{ s.name }}</option>
+                {% endfor %}
+            </select>
+            <select name="type" id="filter-type">
+                <option value="">— Тип —</option>
+                {% for t in types %}
+                    <option value="{{ t.id }}" {% if filters.type == t.id|stringformat:"s" %}selected{% endif %}>{{ t.name }}</option>
+                {% endfor %}
+            </select>
+            <select name="category" id="filter-category">
+                <option value="">— Категория —</option>
+                {% for c in categories %}
+                    <option value="{{ c.id }}" data-type="{{ c.type_id }}" {% if filters.category == c.id|stringformat:"s" %}selected{% endif %}>{{ c.name }}</option>
+                {% endfor %}
+            </select>
+            <select name="subcategory" id="filter-subcategory">
+                <option value="">— Подкатегория —</option>
+                {% for sc in subcategories %}
+                    <option value="{{ sc.id }}" data-category="{{ sc.category_id }}" {% if filters.subcategory == sc.id|stringformat:"s" %}selected{% endif %}>{{ sc.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn-submit">Применить</button>
+            <a href="{% url 'transactions_list' %}" class="btn-reset">Сброс</a>
+        </div>
+    </form>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Статус</th>
+                <th>Тип</th>
+                <th>Категория</th>
+                <th>Подкатегория</th>
+                <th>Сумма</th>
+                <th>Комментарий</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in transactions %}
+            <tr>
+                <td>{{ t.date }}</td>
+                <td>{{ t.status }}</td>
+                <td>{{ t.type.name }}</td>
+                <td>{{ t.category.name }}</td>
+                <td>{{ t.subcategory.name }}</td>
+                <td>{{ t.amount }} ₽</td>
+                <td>{{ t.comment }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="7">Транзакций пока нет.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

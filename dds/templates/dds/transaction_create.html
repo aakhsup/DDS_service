@@ -1,0 +1,25 @@
+{% extends 'dds/base.html' %}
+
+{% block title %}Новая транзакция{% endblock %}
+
+{% block content %}
+    <h1>Новая транзакция</h1>
+
+    {% if form.errors %}
+        <div class="form-errors">
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post" class="form-card">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-submit">Сохранить</button>
+    </form>
+
+    <a href="{% url 'transactions_list' %}" class="btn-back">← Назад к списку</a>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'dds/base.html' %}
+
+{% block title %}Типы{% endblock %}
+
+{% block content %}
+    <h1>Список типов</h1>
+    <table>
+        <thead>
+            <tr><th>ID</th><th>Название</th></tr>
+        </thead>
+        <tbody>
+            {% for type in types %}
+            <tr>
+                <td>{{ type.id }}</td>
+                <td>{{ type.name }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="2">Типов пока нет.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

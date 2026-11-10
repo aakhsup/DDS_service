@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.pyc
+*.log
+
+# Виртуальное окружение
+venv/
+
+# База данных (у каждого своя)
+db.sqlite3
+
+# Секреты и настройки окружения
+.env
+
+# IDE
+.vscode/
+.idea/
+
+
+# Мусор ОС
+.DS_Store
+Thumbs.db

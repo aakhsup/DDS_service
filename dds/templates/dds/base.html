@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}DDS{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{% url 'home' %}" class="logo">💰 Домашняя бухгалтерия</a>
+        <div class="nav-links">
+            <a href="{% url 'types_list' %}">Типы</a>
+            <a href="{% url 'categories_list' %}">Категории</a>
+            <a href="{% url 'transactions_list' %}">Транзакции</a>
+            <a href="{% url 'transaction_create' %}" class="btn-add">+ Добавить транзакцию</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const typeSel = document.getElementById('filter-type');
+        const catSel = document.getElementById('filter-category');
+        const subSel = document.getElementById('filter-subcategory');
+        if (!typeSel || !catSel || !subSel) return;
+
+        function filterOptions(select, attr, allowedValue) {
+            let visible = 0;
+            for (const opt of select.options) {
+                if (!opt.value) continue; // пустой вариант «— Все —» не трогаем
+                const show = !allowedValue || opt.dataset[attr] === allowedValue;
+                opt.hidden = !show;
+                if (show) visible++;
+            }
+        }
+
+        function update() {
+            filterOptions(catSel, 'type', typeSel.value);
+            filterOptions(subSel, 'category', catSel.value);
+            if (catSel.selectedOptions[0]?.hidden) catSel.value = '';
+            if (subSel.selectedOptions[0]?.hidden) subSel.value = '';
+        }
+
+        typeSel.addEventListener('change', update);
+        catSel.addEventListener('change', update);
+        update(); // применить при загрузке, если фильтры уже стоят в URL
+    });
+    </script>
+
+</body>
+</html>
